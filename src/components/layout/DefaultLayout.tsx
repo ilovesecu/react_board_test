@@ -20,6 +20,8 @@ import MailIcon from '@mui/icons-material/Mail';
 import DynamicFeedIcon from '@mui/icons-material/DynamicFeed';
 import InsertPhotoIcon from '@mui/icons-material/InsertPhoto';
 import { Outlet, useNavigate } from 'react-router-dom';
+import {MenuList} from "../../redux/types/MenuType";
+import MenuListComponent from './MenuListComponent';
 
 const drawerWidth = 240;
 
@@ -110,6 +112,20 @@ const DefaultLayout = ({children}:LayoutDefaultProps) => {
     };
 
     const navigate = useNavigate();
+    const menus:MenuList = [
+        {
+            id:1,
+            name:'Gallay',
+            link:'/home',
+            icon:<DynamicFeedIcon/>
+        },
+        {
+            id:2,
+            name:'Mail',
+            link:'/mail',
+            icon:<DynamicFeedIcon/>
+        }
+    ]
 
     return (
         <Box sx={{ display: 'flex' }}>
@@ -141,7 +157,7 @@ const DefaultLayout = ({children}:LayoutDefaultProps) => {
                 </DrawerHeader>
                 <Divider />
                 <List>
-                    {['Inbox', 'Starred'].map((text, index) => (
+                    {/*{['Inbox', 'Starred'].map((text, index) => (
                         <ListItem key={text} disablePadding sx={{ display: 'block' }} onClick={e=>navigate('/articles')}>
                             <ListItemButton
                                 sx={{
@@ -162,7 +178,8 @@ const DefaultLayout = ({children}:LayoutDefaultProps) => {
                                 <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
                             </ListItemButton>
                         </ListItem>
-                    ))}
+                    ))}*/}
+                    <MenuListComponent menus={menus} open={open} navigate={navigate}/>
                 </List>
                 <Divider />
                 <List>
