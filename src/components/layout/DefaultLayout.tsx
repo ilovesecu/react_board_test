@@ -22,6 +22,7 @@ import InsertPhotoIcon from '@mui/icons-material/InsertPhoto';
 import { Outlet, useNavigate } from 'react-router-dom';
 import {MenuList} from "../../redux/types/MenuType";
 import MenuListComponent from './MenuListComponent';
+import MarkAsUnreadIcon from '@mui/icons-material/MarkAsUnread';
 
 const drawerWidth = 240;
 
@@ -115,17 +116,49 @@ const DefaultLayout = ({children}:LayoutDefaultProps) => {
     const menus:MenuList = [
         {
             id:1,
-            name:'Gallay',
-            link:'/home',
-            icon:<DynamicFeedIcon/>
+            name:'FreeBoard',
+            link:'/board',
+            icon:<DynamicFeedIcon/> /* 이걸 API로 가져왔을 때 해당 컴포넌트가 들어가도록 해야함! */
         },
         {
             id:2,
-            name:'Mail',
+            name:'Gallery',
             link:'/mail',
-            icon:<DynamicFeedIcon/>
+            icon:<InsertPhotoIcon/>
         }
     ]
+    const menuObj = {
+        1:[
+            {
+                id:1,
+                name:'FreeBoard',
+                link:'/board',
+                icon:<DynamicFeedIcon/> /* 이걸 API로 가져왔을 때 해당 컴포넌트가 들어가도록 해야함! */
+            },
+            {
+                id:2,
+                name:'Gallery',
+                link:'/mail',
+                icon:<InsertPhotoIcon/>
+            }
+        ],
+        2:[
+            {
+                id:3,
+                name:'Mail',
+                link:'/mail',
+                icon:<MarkAsUnreadIcon/> /* 이걸 API로 가져왔을 때 해당 컴포넌트가 들어가도록 해야함! */
+            },
+        ],
+        3:[
+            {
+                id:3,
+                name:'Mail',
+                link:'/mail',
+                icon:<MarkAsUnreadIcon/> /* 이걸 API로 가져왔을 때 해당 컴포넌트가 들어가도록 해야함! */
+            },
+        ]
+    }
 
     return (
         <Box sx={{ display: 'flex' }}>
@@ -155,57 +188,11 @@ const DefaultLayout = ({children}:LayoutDefaultProps) => {
                         {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
                     </IconButton>
                 </DrawerHeader>
-                <Divider />
-                <List>
-                    {/*{['Inbox', 'Starred'].map((text, index) => (
-                        <ListItem key={text} disablePadding sx={{ display: 'block' }} onClick={e=>navigate('/articles')}>
-                            <ListItemButton
-                                sx={{
-                                    minHeight: 48,
-                                    justifyContent: open ? 'initial' : 'center',
-                                    px: 2.5,
-                                }}
-                            >
-                                <ListItemIcon
-                                    sx={{
-                                        minWidth: 0,
-                                        mr: open ? 3 : 'auto',
-                                        justifyContent: 'center',
-                                    }}
-                                >
-                                    {index % 2 === 0 ? <DynamicFeedIcon /> : <MailIcon />}
-                                </ListItemIcon>
-                                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-                            </ListItemButton>
-                        </ListItem>
-                    ))}*/}
-                    <MenuListComponent menus={menus} open={open} navigate={navigate}/>
-                </List>
-                <Divider />
-                <List>
-                    {['Gallary', 'Trash'].map((text, index) => (
-                        <ListItem key={text} disablePadding sx={{ display: 'block' }}>
-                            <ListItemButton
-                                sx={{
-                                    minHeight: 48,
-                                    justifyContent: open ? 'initial' : 'center',
-                                    px: 2.5,
-                                }}
-                            >
-                                <ListItemIcon
-                                    sx={{
-                                        minWidth: 0,
-                                        mr: open ? 3 : 'auto',
-                                        justifyContent: 'center',
-                                    }}
-                                >
-                                    {index % 2 === 0 ? <InsertPhotoIcon /> : <MailIcon />}
-                                </ListItemIcon>
-                                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-                            </ListItemButton>
-                        </ListItem>
-                    ))}
-                </List>
+                    {
+                        Object.entries(menuObj).map(([key, value], index) =>
+                            <MenuListComponent menus={value} open={open} navigate={navigate} isDivider={true} />
+                        )
+                    }
             </Drawer>
             <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
                 <DrawerHeader />
