@@ -1,6 +1,4 @@
-import SvgIcon, {SvgIconTypeMap} from "@mui/material/SvgIcon/SvgIcon";
 import React, {ReactElement} from "react";
-import {OverridableComponent} from "@mui/material/OverridableComponent";
 
 export type Menu = {
     id:number;
@@ -10,3 +8,6 @@ export type Menu = {
 }
 
 export type MenuList = Menu[];
+export type MenuObj = {
+    [key:number]:MenuList;
+}

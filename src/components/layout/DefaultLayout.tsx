@@ -20,7 +20,7 @@ import MailIcon from '@mui/icons-material/Mail';
 import DynamicFeedIcon from '@mui/icons-material/DynamicFeed';
 import InsertPhotoIcon from '@mui/icons-material/InsertPhoto';
 import { Outlet, useNavigate } from 'react-router-dom';
-import {MenuList} from "../../redux/types/MenuType";
+import {MenuList,MenuObj} from "../../redux/types/MenuType";
 import MenuListComponent from './MenuListComponent';
 import MarkAsUnreadIcon from '@mui/icons-material/MarkAsUnread';
 
@@ -113,21 +113,7 @@ const DefaultLayout = ({children}:LayoutDefaultProps) => {
     };
 
     const navigate = useNavigate();
-    const menus:MenuList = [
-        {
-            id:1,
-            name:'FreeBoard',
-            link:'/board',
-            icon:<DynamicFeedIcon/> /* 이걸 API로 가져왔을 때 해당 컴포넌트가 들어가도록 해야함! */
-        },
-        {
-            id:2,
-            name:'Gallery',
-            link:'/mail',
-            icon:<InsertPhotoIcon/>
-        }
-    ]
-    const menuObj = {
+    const menuObj:MenuObj = {
         1:[
             {
                 id:1,
@@ -138,7 +124,7 @@ const DefaultLayout = ({children}:LayoutDefaultProps) => {
             {
                 id:2,
                 name:'Gallery',
-                link:'/mail',
+                link:'/gallery',
                 icon:<InsertPhotoIcon/>
             }
         ],
