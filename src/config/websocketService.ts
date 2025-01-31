@@ -3,7 +3,7 @@ import SockJS from "sockjs-client";
 import {Simulate} from "react-dom/test-utils";
 import error = Simulate.error;
 
-const SOCKET_URL = "http://localhost:8080/ws";
+const SOCKET_URL = "http://localhost:9594/ws";
 export const connectWebsocket = (onMessage:(message:any)=>void, roomId:string) => {
     const client = new Client({
         webSocketFactory: () => new SockJS(SOCKET_URL),
