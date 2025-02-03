@@ -9,7 +9,7 @@ export const connectWebsocket = (onMessage:(message:any)=>void, roomId:string) =
         webSocketFactory: () => new SockJS(SOCKET_URL),
         onConnect: ()=>{
             console.log(`연결되었다능 roomId:${roomId}`);
-            client.subscribe(`/topic/room/${roomId}`, (msg)=>{
+            client.subscribe(`/sub/room/${roomId}`, (msg)=>{
                 onMessage(JSON.parse(msg.body));
             })
         },

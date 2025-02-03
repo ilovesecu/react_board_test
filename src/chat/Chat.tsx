@@ -20,7 +20,7 @@ const Chat = ({roomId}: {roomId:string}) => {
 
     const sendMessage = () => {
         if(client && message){
-            client.publish({destination:`/chat/send/${roomId}`, body: JSON.stringify({ sender: "User", content: message }) });
+            client.publish({destination:`/pub/send`, body: JSON.stringify({ sender: "User", content: message, roomId:`${roomId}` }) });
             setMessage("");
         }
     }
