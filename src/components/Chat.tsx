@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { connectWebsocket } from "../config/websocketService";
 import apiClient from "../api/apiClient";
+import {useParams} from "react-router-dom";
 
-const Chat = ({roomId}: {roomId:string}) => {
+const Chat = (/*{roomId}: {roomId:string}*/) => {
+    const {roomId} = useParams<{roomId:string}>();
+
     const [messages, setMessages] = useState<{ sender: string; content: string }[]>([]);
     const [message, setMessage] = useState("");
     const [client, setClient] = useState<any>(null);
 
     useEffect(()=>{
+        if(!roomId)return ;
         const newClient = connectWebsocket((msg)=>{
             setMessages((prev)=>[...prev, msg]);
         },roomId);
@@ -32,6 +36,9 @@ const Chat = ({roomId}: {roomId:string}) => {
         }
     }
 
+    if(!roomId){
+        return <div>잘못된 채팅방 ID입니다.</div>;
+    }
 
     return (
         <div>
