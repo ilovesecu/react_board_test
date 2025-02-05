@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { connectWebsocket } from "../config/websocketService";
+import apiClient from "../api/apiClient";
 
 const Chat = ({roomId}: {roomId:string}) => {
     const [messages, setMessages] = useState<{ sender: string; content: string }[]>([]);
@@ -11,6 +12,12 @@ const Chat = ({roomId}: {roomId:string}) => {
             setMessages((prev)=>[...prev, msg]);
         },roomId);
         setClient(newClient);
+
+        //이전 메시지 조회
+        apiClient.get(`/chat/contents/${roomId}`).then((res)=>{
+            setMessages(res.data);
+        });
+
         return ()=>{
             (async ()=>{
                 await newClient.deactivate();
@@ -20,7 +27,7 @@ const Chat = ({roomId}: {roomId:string}) => {
 
     const sendMessage = () => {
         if(client && message){
-            client.publish({destination:`/pub/send`, body: JSON.stringify({ sender: "User", content: message, roomId:`${roomId}` }) });
+            client.publish({destination:`/pub/send`, body: JSON.stringify({ sender: "User", content: message, roomId:`${roomId}`, writerId:1 }) });
             setMessage("");
         }
     }
