@@ -5,6 +5,9 @@ import Chat from "./components/Chat";
 import Calculator from "./components/Temp/Calculator";
 import DarkOrLight from "./components/Context/DarkOrLight";
 import LanguageMain from "./components/Context/Language/LanguageMain";
+import MainPage from "./components/mini/page/MainPage";
+import PostWritePage from "./components/mini/page/PostWritePage";
+import PostViewPage from "./components/mini/page/PostViewPage";
 
 function App() {
     return (
@@ -16,6 +19,10 @@ function App() {
                 <Route path="/temp" element={<Calculator/>}/>
                 <Route path="/theme" element={<DarkOrLight/>}/>
                 <Route path="/lang" element={<LanguageMain/>}/>
+
+                <Route path="/mini" element={<MainPage/>}/>
+                <Route path="/post-write" element={<PostWritePage/>}/>
+                <Route path="/post/:postId" element={<PostViewPage/>}/>
             </Routes>
         </Router>
     )

@@ -17,9 +17,9 @@ const StyledTextarea = styled.textarea<StyledTextareaProps>`
   line-height: 20px;
 `;
 
-function TextArea(props:any){
+function TextInput(props:any){
     const {value, height, onChange} = props;
 
     return <StyledTextarea value={value} height={height} onChange={onChange} />;
 }
-export default TextArea;
+export default TextInput;
